@@ -87,6 +87,22 @@ let userData = {
 };
 
 /**FUNCIONES */
+
+/**
+ * Reproducir la cancion
+ */
+const playSong = (id) => {
+  const song = userData?.songs.find((song)=> song.id ===id);
+  audio.src = song.src;
+  audio.title = song.title;
+  if (userData?.currentSong === null ||  userData?.currentSong.id !== song.id) {
+    audio.currentTime=0;
+  }else{
+    audio.currentTime = userData?.songCurrentTime;
+  }
+}
+
+
 /**
  * Muestra la lista de canciones 
  */
@@ -119,8 +135,7 @@ const renderSongs = (array) => {
  * en cadenas y los ordena según sus valores en la codificación UTF-16.
  */
 const sortSongs = () =>{
-  userData?.songs.sort(
-    (a,b)=>{
+  userData?.songs.sort((a,b)=>{
       if (a.title < b.title) {
         return -1;
       }
@@ -135,4 +150,4 @@ const sortSongs = () =>{
 
 
 
-renderSongs(sortSongs(userData?.songs));
+renderSongs(sortSongs());
