@@ -118,7 +118,7 @@ const pauseSong = ()=> {
 };
 
 
-/**Duncion para pasar a la siguiente cancion */
+/**Funcion para pasar a la siguiente cancion */
 const playNextSong = () => {
  if (userData?.currentSong === null) {
    playSong(userData?.songs[0].id)
@@ -128,6 +128,18 @@ const playNextSong = () => {
   playSong(nextSong.id);
  }
 }
+/**Funcion para pasar a la ATRAS LA cancion */
+const playPreviousSong = () => {
+ if (userData?.currentSong === null) {
+   return
+ }else{
+  const currentSongIndex = getCurrentSongIndex();
+  const previousSong = userData?.songs[currentSongIndex - 1];
+  playSong(previousSong.id);
+ }
+}
+
+/** */
 
 /**
  * Muestra la lista de canciones 
@@ -173,10 +185,13 @@ playButton.addEventListener("click", ()=>{
 /**Se agrega la funcion de pausar al button pauseButton */
 pauseButton.addEventListener("click", pauseSong);
 
-
 /**Se agrega la funcion de pasar a la siguiente cancion al button nextButton  */
 
 nextButton.addEventListener("click", playNextSong);
+
+/**Se agrega la funcion de pasar a la atrras la cancion al button previousButton  */
+
+previousButton.addEventListener("click", playPreviousSong);
 
 /**
  * ORDERNA LA LISTA DE CACIONES DE FORMA ALFABETICA
