@@ -165,6 +165,19 @@ const highlightCurrentSong  = () =>{
     songToHighlight.setAttribute("aria-current", "true");
   }
 }
+
+
+/**Funcion para el boton aleatory */
+const shuffle = () => {
+  userData?.songs.sort(()=> Math.random() - 0.5); //Una forma de aleatorizar una serie de elementos sería restar 0,5 de Math.random(), lo que produce valores aleatorios que son positivos o negativos
+  userData.currentSong = null;
+  userData.songCurrentTime = 0;
+  renderSongs(userData?.songs);
+  pauseSong();
+  setPlayerDisplay();
+  setPlayButtonAccessibleText();
+}
+
 /**
  * Muestra la lista de canciones 
  */
@@ -224,6 +237,12 @@ nextButton.addEventListener("click", playNextSong);
 /**Se agrega la funcion de pasar a la atrras la cancion al button previousButton  */
 
 previousButton.addEventListener("click", playPreviousSong);
+
+
+
+/**Se agrega la funcion de aleatorizar las canciones  al button shuffleButton  */
+
+shuffleButton.addEventListener("click", shuffle);
 
 /**
  * ORDERNA LA LISTA DE CACIONES DE FORMA ALFABETICA
