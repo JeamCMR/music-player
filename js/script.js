@@ -104,6 +104,8 @@ const playSong = (id) => {
   userData.currentSong = song;
   playButton.classList.add("playing");
   highlightCurrentSong();
+  setPlayerDisplay();
+  setPlayButtonAccessibleText();
   audio.play();
 };
 
@@ -139,6 +141,17 @@ const playPreviousSong = () => {
   playSong(previousSong.id);
  }
 }
+
+/*Funcion para mostrar informacion de la cancion en el html */
+const setPlayerDisplay  = () => {
+  const playingSong = document.getElementById("player-song-title");
+  const songArtist  = document.getElementById("player-song-artist");
+  const currentTitle = userData?.currentSong?.title;
+  const currentArtist = userData?.currentSong?.artist;
+  playingSong.textContent = currentTitle ? currentTitle : "";
+  songArtist.textContent = currentArtist ? currentArtist : "";
+}
+
 
 /** Funcion para seleccionar y resaltar la cancion que se esta reproducion actualmente */
 const highlightCurrentSong  = () =>{
@@ -177,6 +190,14 @@ const renderSongs = (array) => {
       playlistSongs.innerHTML = songsHTML;
 
 };
+
+
+/**Funcion para mostar una descripcion de la cacion en el boton play */
+
+const setPlayButtonAccessibleText = () =>{
+  const song = userData?.currentSong || userData?.songs[0];
+  playButton.setAttribute("aria-label", song?.title ? `Play ${song.title}` : 'Play' );
+}
 
 /**funcion para obtener el indice del audio que se estra reproduccion actualmente  */
 const getCurrentSongIndex = () =>{
