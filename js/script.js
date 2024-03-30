@@ -103,6 +103,7 @@ const playSong = (id) => {
   
   userData.currentSong = song;
   playButton.classList.add("playing");
+  highlightCurrentSong();
   audio.play();
 };
 
@@ -139,8 +140,18 @@ const playPreviousSong = () => {
  }
 }
 
-/** */
+/** Funcion para seleccionar y resaltar la cancion que se esta reproducion actualmente */
+const highlightCurrentSong  = () =>{
+  const playlistSongElements = document.querySelectorAll(".playlist-song");
+  const songToHighlight = document.getElementById(`song-${userData?.currentSong?.id}`);
+  playlistSongElements.forEach(songEl => {
+    songEl.removeAttribute("aria-current");
+  });
 
+  if(songToHighlight){
+    songToHighlight.setAttribute("aria-current", "true");
+  }
+}
 /**
  * Muestra la lista de canciones 
  */
